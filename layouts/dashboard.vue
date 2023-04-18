@@ -9,3 +9,20 @@
         <Footer />
     </div>
 </template>
+
+<script>
+useHead({
+  bodyAttrs: {
+    class: 'h-full'
+  },
+  htmlAttrs: {
+    class: 'h-full'
+  },
+})
+</script>
+
+<style>
+#__nuxt {
+  height: 100%;
+}
+</style>
