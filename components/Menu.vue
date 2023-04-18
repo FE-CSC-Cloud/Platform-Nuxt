@@ -3,8 +3,8 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 let route = useRoute()
-let defaultClasses = 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700';
-let activeClasses = 'border-primary bg-gray-300 text-gray-900';
+let defaultClasses = 'border-transparent text-gray-500 hover:border-red-200 hover:text-primary-dark';
+let activeClasses = 'border-secondary bg-gray-200 text-primary';
 </script>
 <template>
   <Disclosure as="nav" class="bg-white shadow" v-slot="{ open }">
