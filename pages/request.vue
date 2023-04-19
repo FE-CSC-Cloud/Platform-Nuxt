@@ -54,7 +54,7 @@ export default {
     const state = reactive({
         name: '',
         description: '',
-        os: ''
+        os: null
       })
 
     const rules = {
