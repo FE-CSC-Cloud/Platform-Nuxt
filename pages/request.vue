@@ -79,7 +79,14 @@ export default {
   methods: {
     async submit() {
       let formCorrect = await this.v$.$validate()
-      if (formCorrect) alert(this.state.name, formCorrect)
+
+      if (formCorrect) {
+        let data = await useMyFetch('/request', {
+          method: 'POST',
+          body: this.state
+        })
+        console.log(data)
+      }
     }
   }
 }
