@@ -13,6 +13,8 @@
     "nuxt-headlessui": "^1.1.1"
   },
   "dependencies": {
-    "@heroicons/vue": "^2.0.17"
+    "@heroicons/vue": "^2.0.17",
+    "@vuelidate/core": "^2.0.2",
+    "@vuelidate/validators": "^2.0.2"
   }
 }
