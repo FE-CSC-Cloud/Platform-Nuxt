@@ -46,7 +46,7 @@ definePageMeta({
 })
 
 import { useVuelidate } from '@vuelidate/core'
-import { required } from '@vuelidate/validators'
+import { required } from '@/utils/i18n-validators'
 
 
 export default {
