@@ -5,7 +5,7 @@
                 <h1 class="font-bold text-2xl">Inloggen</h1>
                 <p class="mt-2 text-gray-800 w-auto text-md w-2/3 mx-auto">Log in met jouw schoolmail of platform geregistreerde mail.</p>
             </div>
-            <div class="w-3/4 mx-auto mt-10">
+            <div class="w-3/4 mx-auto mt-5">
                 <div>
                     <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email<span class="text-red-500">*</span></label>
                     <div class="mt-1">
@@ -15,6 +15,16 @@
                         <div class="error-msg">{{ error.$message }}</div>
                     </div>
                 </div>
+                <div class="rounded-md bg-red-50 p-4 my-5" v-if="emailDoesNotExist">
+                  <div class="flex">
+                    <div class="flex-shrink-0">
+                      <XCircleIcon class="h-5 w-5 text-red-400" aria-hidden="true" />
+                    </div>
+                    <div class="ml-3">
+                      <h3 class="text-sm font-medium text-red-800">Jouw email is niet bekend bij ons</h3>
+                    </div>
+                  </div>
+                </div>
                 <div class="mt-5">
                     <button v-on:click="submit" type="button" class="cursor-pointer rounded-md bg-primary px-3.5 py-2.5 w-full text-sm font-semibold text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-dark">Volgende</button>
                 </div>
@@ -23,49 +33,56 @@
     </div>
 </template>
 
-<script>
+<script>              
 definePageMeta({
   layout: "unauthenticated"
 })
 
 import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@/utils/i18n-validators'
+import { XCircleIcon } from '@heroicons/vue/24/outline'
 
 export default {
-  setup() {
-    const state = reactive({
-        email: '',
-      })
-
-    const rules = {
-      email: {required, email},
-    }
-
-    const v$ = useVuelidate(rules, state)
-
-    return { state, v$ }
-  },
-  data() {
-    return {
-        inputClasses: getInputClasses()
-    }
-  },
-  methods: {
-    async submit() {
-      let formCorrect = await this.v$.$validate()
-
-      if (formCorrect) {
-        let data = await useMyFetch('/user/checkmail', {
-          method: 'POST',
-          body: this.state
+    setup() {
+        const state = reactive({
+            email: "",
         })
+        const rules = {
+            email: { required, email },
+        }
+        const v$ = useVuelidate(rules, state)
+        return { state, v$ }
+    },
+    data() {
+        return {
+            inputClasses: getInputClasses(),
+            emailDoesNotExist: false,
+            email: ''
+        };
+    },
+    methods: {
+        async submit() {
+            this.emailDoesNotExist = false
+            let formCorrect = await this.v$.$validate()
+            if (formCorrect) {
+              let response = await useMyFetch("/auth/handleEmail", {
+                  method: "POST",
+                  body: {...this.state}
+              })
 
-        console.log(data)
+              let responseData = response?.data.value || {}
 
-        redirectUser(data)
-      }
-    }
-  }
+              if (responseData.user) {
+                  redirectUser(responseData.user)
+              } else {
+                  this.emailDoesNotExist = true
+              }
+
+              this.v$.$reset()
+            }
+        }
+    },
+    components: { XCircleIcon }
 }
 </script>
 
