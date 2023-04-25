@@ -1,4 +1,4 @@
-export const redirectUser = (user) => {
+export const redirectUser = (user, email) => {
     const router = useRouter()
     let path = '/login/credentials'
 
@@ -7,6 +7,6 @@ export const redirectUser = (user) => {
     // Replace data.email with the email sent back from the API
     router.push({
         path: path,
-        query: { email: user.email },
+        query: { email: email },
     });
 }

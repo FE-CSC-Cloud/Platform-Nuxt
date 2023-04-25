@@ -15,16 +15,6 @@
                         <div class="error-msg">{{ error.$message }}</div>
                     </div>
                 </div>
-                <div class="rounded-md bg-red-50 p-4 my-5" v-if="emailDoesNotExist">
-                  <div class="flex">
-                    <div class="flex-shrink-0">
-                      <XCircleIcon class="h-5 w-5 text-red-400" aria-hidden="true" />
-                    </div>
-                    <div class="ml-3">
-                      <h3 class="text-sm font-medium text-red-800">Jouw email is niet bekend bij ons</h3>
-                    </div>
-                  </div>
-                </div>
                 <div class="mt-5">
                     <button v-on:click="submit" type="button" class="cursor-pointer rounded-md bg-primary px-3.5 py-2.5 w-full text-sm font-semibold text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-dark">Volgende</button>
                 </div>
@@ -56,7 +46,6 @@ export default {
     data() {
         return {
             inputClasses: getInputClasses(),
-            emailDoesNotExist: false,
             email: ''
         };
     },
@@ -72,11 +61,7 @@ export default {
 
               let responseData = response?.data.value || {}
 
-              if (responseData.user) {
-                  redirectUser(responseData.user)
-              } else {
-                  this.emailDoesNotExist = true
-              }
+              redirectUser(responseData.user, this.state.email)
 
               this.v$.$reset()
             }
