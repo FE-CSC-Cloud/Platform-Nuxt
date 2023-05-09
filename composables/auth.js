@@ -1,3 +1,5 @@
+import sha256 from 'crypto-js/sha256'
+
 export const setAuthToken = async (token) => {
     // Set cookie
     let expiryDate = new Date().getTime() + 43200000 // 12 hours
@@ -22,4 +24,8 @@ export const logout = () => {
     authorizedUser.value = null
 
     navigateTo('/login')
+}
+
+export const getHashedString = (string) => {
+    return sha256(string).toString()
 }

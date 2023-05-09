@@ -51,6 +51,7 @@ definePageMeta({
   layout: "unauthenticated"
 })
 
+import crypto from 'crypto'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@/utils/i18n-validators'
 import { XCircleIcon } from '@heroicons/vue/24/outline'
@@ -86,10 +87,16 @@ export default {
       this.incorrectResponse = false
       let formCorrect = await this.v$.$validate()
 
+      // Copy this.state to not have the visible password be the hashed string
+      let data = {...this.state}
+
+      // Prepare password for safe request
+      data.password = getHashedString(data.password)
+
       if (formCorrect) {
         let response = await useMyFetch('/auth/login', {
           method: 'POST',
-          body: {...this.state}
+          body: {...data}
         })
         let responseData = response?.data.value || {}
 

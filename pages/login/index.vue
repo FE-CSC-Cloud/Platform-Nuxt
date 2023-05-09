@@ -23,14 +23,13 @@
     </div>
 </template>
 
-<script>              
+<script>         
 definePageMeta({
   layout: "unauthenticated"
 })
 
 import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@/utils/i18n-validators'
-import { XCircleIcon } from '@heroicons/vue/24/outline'
 
 export default {
     setup() {
@@ -67,7 +66,6 @@ export default {
             }
         }
     },
-    components: { XCircleIcon }
 }
 </script>
 
