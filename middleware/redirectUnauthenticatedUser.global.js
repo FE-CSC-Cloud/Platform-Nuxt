@@ -1,7 +1,8 @@
 export default defineNuxtRouteMiddleware((to, from) => {
     const allowedUnauthorizedRouteNames = [
         'login',
-        'login-credentials'
+        'login-credentials',
+        'index'
     ]
 
     const access_token = useCookie('access_token')
