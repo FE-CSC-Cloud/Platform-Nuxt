@@ -1,4 +1,4 @@
-export const redirectUser = (user, email) => {
+export const redirectUser = (email) => {
     const router = useRouter()
     let path = '/login/credentials'
 

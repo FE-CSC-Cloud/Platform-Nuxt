@@ -50,18 +50,9 @@ export default {
     },
     methods: {
         async submit() {
-            this.emailDoesNotExist = false
             let formCorrect = await this.v$.$validate()
             if (formCorrect) {
-              let response = await useMyFetch("/auth/handleEmail", {
-                  method: "POST",
-                  body: {...this.state}
-              })
-
-              let responseData = response?.data.value || {}
-
-              redirectUser(responseData.user, this.state.email)
-
+              redirectUser(this.state.email)
               this.v$.$reset()
             }
         }
