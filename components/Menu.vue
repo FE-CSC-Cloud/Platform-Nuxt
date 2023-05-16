@@ -31,7 +31,7 @@ let activeClasses = 'border-secondary bg-gray-200 text-primary';
         </div>
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <button type="button" class="relative inline-flex items-center gap-x-1.5 rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            <button type="button" v-on:click="logout" class="relative inline-flex items-center gap-x-1.5 rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
               Uitloggen
             </button>
           </div>
