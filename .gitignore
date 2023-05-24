@@ -352,3 +352,6 @@ MigrationBackup/
 .package-lock.json
 package-lock.json
 .nuxt/
+.output
+.vite
+dist
