@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         public: {
-          baseURL: 'https://145.89.192.160:8000/api/',
+          baseURL: 'http://145.89.192.161:8000/api/',
         },
     },
     vite: {
