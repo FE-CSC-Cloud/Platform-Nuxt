@@ -9,40 +9,32 @@
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            username: '',
-            password: ''
-        }
-    },
+<script setup>
+    const username= ''
+    const password= ''
 
-    methods: {
-        async login() {
-            const loginRes = await $fetch('/auth/login', {
-                method: 'POST',
-                baseURL: useRuntimeConfig().public.laravelApiBase,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                query: {
-                    email: this.username,
-                    password: this.password
-                }
+    async function login() {
+        const loginRes = await $fetch('/auth/login', {
+            method: 'POST',
+            baseURL: useRuntimeConfig().public.laravelApiBase,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            query: {
+                email: username,
+                password: password
+            }
+        })
+
+        // If the login was successful, save the token to a cookie
+        if (loginRes.token) {
+            document.cookie = `token=${loginRes.token}`
+            navigateTo({
+                path: '/dashboard',
             })
-
-            // If the login was successful, save the token to a cookie
-            if (loginRes.token) {
-                document.cookie = `token=${loginRes.token}`
-                navigateTo({
-                    path: '/dashboard',
-                })
-            }
-            else {
-                alert('Invalid username or password')
-            }
+        }
+        else {
+            alert('Invalid username or password')
         }
     }
-}
 </script>

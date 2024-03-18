@@ -5,7 +5,7 @@
         <p v-else-if="error">Error: {{error}}</p>
         <p v-else-if="data">Servers: {{data}}</p>
 
-        <button @click="popUpOpen = true; getTemplates();">Maak server</button>
+        <button class="bg-sky-500 p-3 rounded" @click="popUpOpen = true; getTemplates();">Maak server</button>
 
         <div v-if="popUpOpen" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center"
              @click="checkIfShouldClose($event)" ref="popUpBackground">
@@ -33,70 +33,57 @@
     </div>
 </template>
 
-<script>
-export default {
-    async setup() {
-        const {data, pending, error, refresh} = await useFetch('/servers', {
-            method: 'GET',
-            baseURL: useRuntimeConfig().public.laravelApiBase,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${useCookie('token').value}`
-            }
-        })
+<script setup>
+const {data, pending, error, refresh} = await useFetch('/servers', {
+    method: 'GET',
+    baseURL: useRuntimeConfig().public.laravelApiBase,
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${useCookie('token').value}`
+    }
+})
 
-        return data;
-    },
-    data() {
-        return {
-            popUpOpen: false,
-            templates: [],
-            requestSent: false,
+const {data: templates} = await useLazyFetch('/templates', {
+    method: 'GET',
+    baseURL: useRuntimeConfig().public.laravelApiBase,
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${useCookie('token').value}`
+    }
+})
 
-            naam: '',
-            beschrijving: '',
-            end_date: '',
-            selectedTemplate: null
-        }
-    },
-    methods: {
-        checkIfShouldClose(event){
-            if (event.target === this.$refs.popUpBackground) {
-                this.popUpOpen = false
-            }
-        },
 
-        async getTemplates() {
-            const {data, pending, error, refresh} = await useFetch('/templates', {
-                method: 'GET',
-                baseURL: useRuntimeConfig().public.laravelApiBase,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${useCookie('token').value}`
-                }
-            })
+let popUpOpen = false
+let requestSent = false
 
-            this.templates = data
-        },
+let naam = ''
+let beschrijving = ''
+let end_date = ''
+let selectedTemplate = null
 
-        async makeServerRequest() {
-            this.popUpOpen = false
-            this.requestSent = true
-            const {data, pending, error, refresh} = await useFetch('/servers', {
-                method: 'POST',
-                baseURL: useRuntimeConfig().public.laravelApiBase,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${useCookie('token').value}`
-                },
-                body: JSON.stringify({
-                    name: this.naam,
-                    description: this.beschrijving,
-                    end_date: this.end_date,
-                    operating_system: this.selectedTemplate
-                })
-            })
-        }
+function checkIfShouldClose(event){
+    if (event.target === this.$refs.popUpBackground) {
+        popUpOpen = false
     }
 }
+
+async function makeServerRequest() {
+    popUpOpen = false
+    requestSent = true
+    await useFetch('/servers', {
+        method: 'POST',
+        baseURL: useRuntimeConfig().public.laravelApiBase,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${useCookie('token').value}`
+        },
+        body: JSON.stringify({
+            name: naam,
+            description: beschrijving,
+            end_date: end_date,
+            operating_system: selectedTemplate
+        })
+    })
+}
+
 </script>
