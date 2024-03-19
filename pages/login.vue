@@ -21,8 +21,8 @@
                 'Content-Type': 'application/json'
             },
             query: {
-                email: username,
-                password: password
+                email: this.username,
+                password: this.password
             }
         })
 

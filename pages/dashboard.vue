@@ -63,13 +63,13 @@ let selectedTemplate = null
 
 function checkIfShouldClose(event){
     if (event.target === this.$refs.popUpBackground) {
-        popUpOpen = false
+        this.popUpOpen = false
     }
 }
 
 async function makeServerRequest() {
-    popUpOpen = false
-    requestSent = true
+    this.popUpOpen = false
+    this.requestSent = true
     await useFetch('/servers', {
         method: 'POST',
         baseURL: useRuntimeConfig().public.laravelApiBase,
@@ -78,10 +78,10 @@ async function makeServerRequest() {
             'Authorization': `Bearer ${useCookie('token').value}`
         },
         body: JSON.stringify({
-            name: naam,
-            description: beschrijving,
-            end_date: end_date,
-            operating_system: selectedTemplate
+            name: this.naam,
+            description: this.beschrijving,
+            end_date: this.end_date,
+            operating_system: this.selectedTemplate
         })
     })
 }
