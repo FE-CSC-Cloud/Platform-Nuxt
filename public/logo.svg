@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" viewBox="0 0 40 40">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="20" height="39" transform="translate(94 31)" fill="#278ecd"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect id="Rectangle_3" data-name="Rectangle 3" width="20" height="20" transform="translate(93 31)" fill="#278ecd"/>
+    </clipPath>
+  </defs>
+  <g id="OICT" transform="translate(-102 -32)">
+    <g id="Mask_Group_1" data-name="Mask Group 1" transform="translate(8 1.5)" clip-path="url(#clip-path)">
+      <ellipse id="Ellipse_1" data-name="Ellipse 1" cx="20.526" cy="19.5" rx="20.526" ry="19.5" transform="translate(72.947 31)" fill="#278ecd"/>
+    </g>
+    <g id="Mask_Group_2" data-name="Mask Group 2" transform="translate(173 -61) rotate(90)" clip-path="url(#clip-path-2)">
+      <circle id="Ellipse_2" data-name="Ellipse 2" cx="19.5" cy="19.5" r="19.5" transform="translate(74 31)" fill="#278ecd"/>
+    </g>
+    <g id="Mask_Group_3" data-name="Mask Group 3" transform="translate(29 21)" clip-path="url(#clip-path-2)">
+      <circle id="Ellipse_3" data-name="Ellipse 3" cx="19.5" cy="19.5" r="19.5" transform="translate(74 31)" fill="#278ecd"/>
+    </g>
+  </g>
+</svg>

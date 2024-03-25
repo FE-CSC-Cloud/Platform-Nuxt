@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    @apply bg-secondary-800 text-secondary-100;
+    font-family: "DM Sans", sans-serif;
+}
+
+input{
+    @apply w-full mb-4 px-3 py-2 font-medium rounded !outline-none duration-300;
+    @apply bg-secondary-600 border-2 border-secondary-500;
+    @apply placeholder:text-secondary-400 placeholder:font-normal;
+    @apply focus:border-secondary-400 hover:border-secondary-400;
+}
+
+label{
+    @apply text-sm text-secondary-400 mb-1;
+}
+
+.button,
+.btn{
+    @apply px-4 py-2 rounded font-medium duration-300;
+    @apply outline outline-0 outline-offset-2 focus:outline-2;
+}
+
+.wrapper,
+.container{
+    @apply mx-auto px-4 2xl:max-w-6xl xl:max-w-5xl lg:max-w-4xl md:max-w-2xl sm:max-w-lg;
+}
+
+.button.button-primary,
+.btn.btn-primary{
+    @apply bg-primary text-white outline-primary/50;
+    @apply hover:bg-primary/70;
+}
+
+.button.button-secondary,
+.btn.btn-secondary{
+    @apply bg-secondary-500 text-secondary-100 outline-secondary-500/50;
+    @apply hover:text-secondary-50 hover:bg-secondary-500/70;
+}
