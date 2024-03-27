@@ -1,0 +1,10 @@
+services:
+    nuxt:
+        image: my-nuxt-app
+        ports:
+            - 80:3000
+            - 443:3000
+        deploy:
+            replicas: 3
+            restart_policy:
+                condition: on-failure
