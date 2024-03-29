@@ -1,3 +1,9 @@
+#docker swarm init
+
+#docker build -t my-nuxt-app .
+
+#docker stack deploy -c docker-compose.yml nuxt
+
 FROM node:18.13-alpine
 WORKDIR /nuxtDeploy
 COPY . /nuxtDeploy
