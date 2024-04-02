@@ -33,8 +33,8 @@
                 >
 
                 <button class="btn btn-primary w-full mt-3">Login</button>
-
             </form>
+            <copyright />
         </div>
         <div class="w-full h-full p-5">
             <div class="bg-[url(/LoginBanner.png)] w-full h-full rounded-xl" />
@@ -68,16 +68,13 @@
             }
         })
 
-        console.log(loginRes.status)
-
         if (loginRes.token) {
             document.cookie = `token=${loginRes.token}`
             navigateTo({
                 path: '/dashboard',
             })
-        }
-        else {
-            console.log('Invalid username or password')
+        } else {
+            console.log('Invalid username or password');
         }
     }
 

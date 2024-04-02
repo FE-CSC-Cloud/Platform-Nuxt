@@ -6,5 +6,5 @@ export default {
 
 <template>
     EPIC HOME PAGE<br>
-    <NuxtLink class="text-sky-600" to="/login">Login</NuxtLink>
+    <NuxtLink class="text-sky-600" to="/auth/login">Login</NuxtLink>
 </template>
