@@ -25,12 +25,20 @@
                         Wachtwoord vergeten?
                     </NuxtLink>
                 </div>
-                <input
-                    placeholder="Wachtwoord"
-                    type="password"
-                    id="password"
-                    v-model="password"
+                <inputValidation
+                    :value="password"
+                    message="Your password needs to be atleast 8 characters long"
+                    format="^(?=.*\\d).{8,}$"
                 >
+                    <input
+                        class="mb-0"
+                        placeholder="Wachtwoord"
+                        type="password"
+                        id="password"
+                        v-model="password"
+                    >
+                </inputValidation>
+
 
                 <button class="btn btn-primary w-full mt-3">Login</button>
             </form>
@@ -50,22 +58,19 @@
     })
 
     const email= ''
-    const password= ''
+    const password= ref();
 
     async function login() {
-
-        if(!this.email){
-            const error = 'Email is not entered';
-            return;
-        }
         
-        const loginRes = await $fetch('/auth/login', {
+        const { data: loginRes, error } = await $fetch('/auth/login', {
             method: 'POST',
             baseURL: useRuntimeConfig().public.laravelApiBase,
             query: {
                 email: this.email,
                 password: this.password
             }
+        }).catch((err) => {
+            console.log('error', err.status)
         })
 
         if (loginRes.token) {
@@ -78,5 +83,4 @@
         }
     }
 
-    
 </script>
