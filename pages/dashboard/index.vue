@@ -1,11 +1,47 @@
 <template>
-    <div>
+    <div class="bg-secondary-700 py-3 px-4 flex items-center justify-between">
+        <div class="flex items-center gap-x-6">
+            <NuxtLink href="/" class="flex text-2xl ml-2 font-semibold text-secondary-50 items-center gap-x-2">
+                <img src="/logo.png" width="25px" height="25px" alt="Logo" />
+                {{ useRuntimeConfig().public.appName }}
+            </NuxtLink>
+            <NuxtLink href="/" class="group py-2 px-2 flex items-center gap-x-1 hover:text-secondary-100 duration-300">
+                <Icon name="heroicons-solid:view-grid" class="group-hover:text-white duration-300" />
+                Overview
+            </NuxtLink>
+            <NuxtLink href="/" class="group py-2 px-2 flex items-center gap-x-1 hover:text-secondary-100 duration-300">
+                <Icon name="heroicons-solid:users" class="group-hover:text-white duration-300" />
+                Teams
+            </NuxtLink>
+            <NuxtLink href="/" class="group py-2 px-2 flex items-center gap-x-1 hover:text-secondary-100 duration-300">
+                <Icon name="heroicons-solid:document-text" class="group-hover:text-white duration-300" />
+                Requests
+            </NuxtLink>
+        </div>
+        <div class="flex items-center gap-x-1">
+            <NuxtLink href="/" class="px-3 py-2 text-xl hover:bg-secondary-600 rounded-md duration-300">
+                <Icon name="heroicons-solid:book-open" />
+            </NuxtLink>
+            <NuxtLink href="/" class="px-3 py-2 text-xl hover:bg-secondary-600 rounded-md duration-300">
+                <Icon name="heroicons-solid:bell" />
+            </NuxtLink>
+            <NuxtLink href="/" class="px-3 py-2 text-xl hover:bg-secondary-600 rounded-md duration-300">
+                <Icon name="heroicons-solid:user-circle" />
+            </NuxtLink>
+            <NuxtLink href="/" class="button button-primary flex items-center gap-x-1 ml-2">
+                <Icon name="heroicons-solid:plus" />
+                Create server
+            </NuxtLink>
+        </div>
+    </div>
+
+    <div class="wrapper">
         <h1>Dashboard</h1>
         <p v-if="pending">Loading...</p>
         <p v-else-if="error">Error: {{error}}</p>
         <p v-else-if="data">Servers: {{data}}</p>
 
-        <button class="bg-sky-500 p-3 rounded" @click="popUpOpen = true; getTemplates();">Maak server</button>
+        <button class="button button-primary p-3 rounded" @click="popUpOpen = true; getTemplates();">Maak server</button>
 
         <div v-if="popUpOpen" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center"
              @click="checkIfShouldClose($event)" ref="popUpBackground">
@@ -21,7 +57,7 @@
                             {{index}}
                         </option>
                     </select>
-                    <button class="bg-sky-300">Maak server</button>
+                    <button class="button button-primary">Maak server</button>
                 </form>
             </div>
         </div>

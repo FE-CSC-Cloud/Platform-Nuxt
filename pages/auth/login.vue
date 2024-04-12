@@ -7,7 +7,7 @@
                 {{ useRuntimeConfig().public.appName }}
             </div>
 
-            <h1 class="text-lg font-medium my-3">Inloggen</h1>
+            <h1 class="text-lg font-medium my-3 text-secondary-100">Inloggen</h1>
 
             <form @submit.prevent="login()">
                 <label for="email">E-mailadres</label>

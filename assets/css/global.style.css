@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 body{
-    @apply bg-secondary-800 text-secondary-100;
+    @apply bg-secondary-800 text-secondary-200;
     font-family: "DM Sans", sans-serif;
 }
 
@@ -25,13 +25,13 @@ label{
 
 .button,
 .btn{
-    @apply px-4 py-2 rounded font-medium duration-300;
+    @apply px-4 py-2 rounded font-medium duration-300 inline-block;
     @apply outline outline-0 outline-offset-2 focus:outline-2;
 }
 
 .wrapper,
 .container{
-    @apply mx-auto px-4 2xl:max-w-6xl xl:max-w-5xl lg:max-w-4xl md:max-w-2xl sm:max-w-lg;
+    @apply w-full px-4 mx-auto xl:max-w-7xl lg:max-w-5xl md:max-w-3xl;
 }
 
 .button.button-primary,
