@@ -14,7 +14,10 @@
             </div> -->
         </form>
     </div>
-    <div id="output"></div>
+    <div class="bg-black max-w-5xl mx-auto text-white/80 py-4 px-5 rounded-lg overflow-y-auto">
+        <div ref="output" class="h-[400px]">
+        </div>
+    </div>
 </template>
 
 <style>
@@ -24,6 +27,7 @@
 </style>
 
 <script setup>
+    const output = ref(null)
     const username = ref('jens')
     const password = ref('jens!2#')
     const command = ref('')
@@ -31,6 +35,10 @@
     let outputError = []
     var hist_len = 0
     let path = false
+
+    onMounted(()=>{
+        output.value.scrollTo(0,output.value.scrollHeight)
+    })
 
     async function login() {
         const response = await $fetch('/SSH', {
@@ -63,7 +71,7 @@
             outputError[hist_len] = true
         }
 
-        var outputDiv = document.getElementById("output");  // Get the div where we want to display the array
+        var outputDiv = output;  // Get the div where we want to display the array
 
         var ul = document.createElement("ul");  // Create a new unordered list element
 
