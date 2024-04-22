@@ -15,7 +15,7 @@
         </form>
     </div>
     <div class="bg-black max-w-5xl mx-auto text-white/80 py-4 px-5 rounded-lg overflow-y-auto">
-        <div ref="output" class="h-[400px]">
+        <div ref="output" class="h-[400px]" id="myoutput">
         </div>
     </div>
 </template>
@@ -29,7 +29,7 @@
 <script setup>
     const output = ref(null)
     const username = ref('jens')
-    const password = ref('jens!2#')
+    const password = ref('jens')
     const command = ref('')
     let SSHRet = []
     let outputError = []
@@ -37,7 +37,7 @@
     let path = false
 
     onMounted(()=>{
-        output.value.scrollTo(0,output.value.scrollHeight)
+        output.value.scrollTo(0, output.value.scrollHeight);
     })
 
     async function login() {
@@ -50,7 +50,7 @@
             body: JSON.stringify({
                 SSHUser: this.username,
                 SSHPassword: this.password,
-                SSHHost: "172.30.10.51",
+                SSHHost: "145.89.192.64",
                 pathCall: !path,
                 command: this.command
             })
@@ -71,7 +71,7 @@
             outputError[hist_len] = true
         }
 
-        var outputDiv = output;  // Get the div where we want to display the array
+        var outputDiv = document.getElementById("myoutput");  // Get the div where we want to display the array
 
         var ul = document.createElement("ul");  // Create a new unordered list element
 
@@ -86,5 +86,6 @@
         });
 
         outputDiv.appendChild(ul);  // Append the unordered list to the output div
+        // outputDiv.scrollTo(0, outputDiv.scrollHeight);
     }
 </script>
