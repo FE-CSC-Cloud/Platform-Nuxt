@@ -13,7 +13,7 @@
                 <label for="email">E-mailadres</label>
                 <input
                     placeholder="E-mailadres"
-                    type="email"
+                    type="text"
                     id="email"
                     v-model="email"
                     autofocus
@@ -61,14 +61,14 @@
     const password= ref();
 
     async function login() {
+        let formData = new FormData
+        formData.append('username', this.email)
+        formData.append('password', this.password)
         
-        const { data: loginRes, error } = await $fetch('/auth/login', {
+        const loginRes = await $fetch('/auth/login', {
             method: 'POST',
             baseURL: useRuntimeConfig().public.laravelApiBase,
-            query: {
-                email: this.email,
-                password: this.password
-            }
+            body: formData
         }).catch((err) => {
             console.log('error', err.status)
         })

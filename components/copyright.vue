@@ -36,9 +36,9 @@
                         <Icon name="heroicons:arrow-up-right-solid" />
                     </div>
                 </NuxtLink>
-                <NuxtLink to="https://www.linkedin.com/in/bavo/" target="_blank" class="group bg-secondary-500 border-2 border-transparent hover:border-secondary-400/20 py-4 px-5 rounded-lg flex justify-between gap-x-3 duration-300">
+                <NuxtLink to="https://www.linkedin.com/in/faykn/" target="_blank" class="group bg-secondary-500 border-2 border-transparent hover:border-secondary-400/20 py-4 px-5 rounded-lg flex justify-between gap-x-3 duration-300">
                     <div>
-                        <p class="text-lg font-medium">Bavo Knol</p>
+                        <p class="text-lg font-medium">Fay Knol</p>
                         <span class="block text-base text-secondary-200">Mijn Linkedin</span>
                     </div>
                     <div class="group-hover:bg-secondary-400/50 aspect-square rounded-md text-3xl flex items-center justify-center duration-300">
