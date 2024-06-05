@@ -40,21 +40,36 @@
         output.value.scrollTo(0, output.value.scrollHeight);
     })
 
+    import WebSocket from 'ws';
+
     async function login() {
-        const response = await $fetch('/SSH', {
-            method: 'POST',
-            baseURL: 'http://localhost:3300',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                SSHUser: this.username,
-                SSHPassword: this.password,
-                SSHHost: "145.89.192.64",
-                pathCall: !path,
-                command: this.command
-            })
-        })
+        // const response = await $fetch('/SSH', {
+        //     method: 'POST',
+        //     // baseURL: 'http://localhost:3300',
+        //     baseURL: 'wss://localhost:3300',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         SSHUser: this.username,
+        //         SSHPassword: this.password,
+        //         SSHHost: "145.89.192.64",
+        //         pathCall: !path,
+        //         command: this.command
+        //     })
+        // })
+
+        // const ws = new WebSocket('ws://localhost:3300');
+
+        // ws.on('error', console.error);
+
+        // ws.on('open', function open() {
+        // ws.send('something');
+        // });
+
+        // ws.on('message', function message(data) {
+        // console.log('received: %s', data);
+        // });
 
         if (response.code !== undefined) {
             console.log(response)
