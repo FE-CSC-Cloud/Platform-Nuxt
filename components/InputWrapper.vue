@@ -17,22 +17,21 @@
 </template>
 
 <script setup>
+    const props = defineProps({
+        id: String,
+        label: String,
+        description: String,
+        value: String,
+        regex: RegExp,
+        error: String,
+    });
 
-const props = defineProps({
-    id: String,
-    label: String,
-    description: String,
-    value: String,
-    regex: RegExp,
-    error: String,
-});
-
-const isValid = computed(() => {
-    if (!props.value || props.value.length < 3 || !props.regex) {
-        return true; 
-    }
-    const pattern = typeof props.regex === 'string' ? new RegExp(props.regex) : props.regex;
-    return pattern.test(props.value);
-});
+    const isValid = computed(() => {
+        if (!props.value || props.value.length < 3 || !props.regex) {
+            return true; 
+        }
+        const pattern = typeof props.regex === 'string' ? new RegExp(props.regex) : props.regex;
+        return pattern.test(props.value);
+    });
 
 </script>

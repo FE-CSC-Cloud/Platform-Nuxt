@@ -314,10 +314,10 @@ body:has(.requires-no-scroll) {
 }
 
 .tooltip{
-    @apply absolute z-10 max-w-md px-2 py-1 pointer-events-none rounded-md bg-secondary-600 transition-opacity duration-300;
+    @apply absolute z-10 max-w-md px-2 py-1 pointer-events-none rounded-md bg-secondary-500 transition-opacity duration-300;
 }
 .tooltip::after{
-    @apply content-[''] absolute -bottom-2 left-2 border-0 border-l-8 border-t-8 border-y-secondary-600 border-r-8 border-x-transparent;
+    @apply content-[''] absolute -bottom-2 left-2 border-0 border-l-8 border-t-8 border-y-secondary-500 border-r-8 border-x-transparent;
 }
 .tooltip.tooltip-bottom::after{
     @apply border-b-8 border-t-0 bottom-[100%];

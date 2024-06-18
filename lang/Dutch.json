@@ -1,0 +1,9 @@
+{
+    "login": {
+        "title": "Inloggen om verder te gaan",
+        "username": "Gebruikersnaam",
+        "password": "Wachtwoord",
+        "forgot-password": "Wachtwoord vergeten?",
+        "login": "Inloggen"
+    }
+}

@@ -30,14 +30,12 @@
 </template>
   
 <script setup>
-import { defineProps } from 'vue';
-
-const props = defineProps({
-    title: String,
-    cancel: Boolean,
-    close: Function,
-    actionButtonType: String,
-    actionLabel: String,
-    action: Function
-});
-  </script>
+    const props = defineProps({
+        title: String,
+        cancel: Boolean,
+        close: Function,
+        actionButtonType: String,
+        actionLabel: String,
+        action: Function
+    });
+</script>

@@ -12,9 +12,9 @@
 </template>
 
 <script setup>
-const props = defineProps({
-    left: String,
-    right: String,
-    id: String
-})
+    const props = defineProps({
+        left: String,
+        right: String,
+        id: String
+    })
 </script>
