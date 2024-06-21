@@ -1,9 +1,12 @@
 <template>
-    Hello 2
+    Requests
 </template>
 
 <script setup>
     definePageMeta({
         layout: 'dashboard'
+    })
+    useSeoMeta({
+        title: 'Requests' + ' - ' + useRuntimeConfig().public.appName,
     })
 </script>

@@ -1,11 +1,27 @@
 <script setup>
-const { locale, locales, setLocale } = useI18n();
+    const { locale, locales, setLocale } = useI18n();
 </script>
 
 <template>
-    <div v-for="local in locales">
-        <button @click="setLocale(local.code)" :class="local.code === locale && 'bg-primary-200'">
-            {{ local.code }}
-        </button>
-    </div>
+    <Dropdown>
+        <template #button>
+            <button 
+                v-for="local in locales.filter(local => local.code === locale)" 
+                :key="local.code"
+                class="flex items-center gap-x-1"
+            >
+                <Icon name="tabler:language" />
+                {{ local.name }}
+            </button>
+        </template>
+        <template #dropdown>
+            <button
+                v-for="local in locales"
+                @click="setLocale(local.code)"
+                class="button button-secondary"
+            >
+                {{ local.name }}
+            </button>
+        </template>
+    </Dropdown>
 </template>

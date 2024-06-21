@@ -7,4 +7,7 @@
         middleware: ["auth-redirect"],
         layout: 'auth'
     })
+    useSeoMeta({
+        title: 'Forgot password' + ' - ' + useRuntimeConfig().public.appName,
+    })
 </script>

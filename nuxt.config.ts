@@ -1,9 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-
     runtimeConfig: {
         public: {
             baseUrlApi: process.env.NUXT_PUBLIC_BASE_URL_API,
+            refreshInterval: process.env.NUXT_PUBLIC_REFRESH_INTERVAL,
             appName: process.env.NUXT_PUBLIC_APP_NAME
         }
     },
@@ -11,8 +11,10 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
     modules: [
         '@nuxtjs/tailwindcss', 
-        '@nuxtjs/i18n',
-        'nuxt-icon'
+        '@nuxtjs/i18n', 
+        'nuxt-icon', 
+        '@pinia/nuxt',
+        'dayjs-nuxt'
     ],
 
     tailwindcss: {

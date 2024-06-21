@@ -18,6 +18,10 @@ body:has(.requires-no-scroll) {
     @apply w-full px-4 mx-auto xl:max-w-7xl lg:max-w-5xl md:max-w-3xl;
 }
 
+.header{
+    @apply text-xl font-medium text-secondary-300 mb-4;
+}
+
 /* 
     Atoms > Buttons
 */

@@ -64,18 +64,23 @@
     const password = ref('');
 
     async function login() {
+        const formData = new FormData();
+
         isLoading.value = true;
+        formData.append('username', username.value);
+        formData.append('password', password.value);
     
         try {
             const loginRes = await $fetch('/auth/login', {
                 method: 'POST',
                 baseURL: useRuntimeConfig().public.baseUrlApi,
-                body: {
-                    username: username,
-                    password: password
-                }
+                body: formData
             });
-            console.log(loginRes);
+            
+            const session = useCookie("session");
+            session.value = loginRes.token;
+            navigateTo('/');
+
         } catch (error) {
             if (error.response && error.response._data) {
                 isError.value = error.response._data;
