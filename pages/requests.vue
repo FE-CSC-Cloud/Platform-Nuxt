@@ -1,5 +1,5 @@
 <template>
-    Overview
+    Requests
 </template>
 
 <script setup>
@@ -7,6 +7,6 @@
         layout: 'dashboard'
     })
     useSeoMeta({
-        title: 'Overview' + ' - ' + useRuntimeConfig().public.appName,
+        title: 'Requests' + ' - ' + useRuntimeConfig().public.appName,
     })
 </script>
