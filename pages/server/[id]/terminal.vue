@@ -26,8 +26,8 @@
             </button>
         </div>
         <div class="relative flex flex-1 overflow-hidden">
-            <div class="relative h-full w-full overflow-auto">
-                <div>
+            <div class="relative h-full w-full overflow-auto" ref="terminalElement">
+                <div class="px-4 py-3">
                     <p>Terminal komt hier!</p>
                     <p>Terminal komt hier!</p>
                     <p>Terminal komt hier!</p>
@@ -56,13 +56,20 @@
                     <p>Terminal komt hier!</p>
                     <p>Terminal komt hier!</p>
                 </div>
-                <div class="sticky bottom-0">
-                    Testtt
+                <div class="sticky bottom-0 px-4 pb-3 bg-secondary-700">
+                    <InputWrapper>
+                        <input
+                            v-model="command"
+                            required
+                            type="text"
+                            placeholder="Command line"
+                        />
+                    </InputWrapper>
                 </div>
             </div>
             <div 
-                class="max-w-[0px] overflow-hidden duration-300 w-full border-l-0 border-secondary-500" 
-                :class="showFiles && 'max-w-[250px] !border-l'"
+                class="max-w-[0px] py-3 overflow-hidden duration-300 w-full border-l-0 border-secondary-500" 
+                :class="showFiles && 'max-w-[250px] !border-l px-4'"
             >
                 Hello
             </div>
@@ -72,17 +79,39 @@
 
 <script setup>
     import { useServerStore } from '~/store/server';
+    import WebSocket from 'ws';
     
     const server = useServerStore();
 
     const path = ref('C/src');
+    const terminalElement = ref(null);
+    const showFiles = ref(false);
+    const command = ref('')
+
+
     const pathDirectories = computed(() => {
         return path.value.split('/');
     });
-    const showFiles = ref(false);
     
     const toggleShowFiles = () => {
       showFiles.value = !showFiles.value
     }
 
+    const scrollToBottom = () => {
+        if (terminalElement.value) {
+            terminalElement.value.scrollTop = terminalElement.value.scrollHeight;
+        }
+    };
+
+    let ws;
+
+    const connectWebSocket = () => {
+        ws = new WebSocket('ws://145.89.192.64:3300');
+        
+        ws.onopen = () => {
+            console.log('WebSocket connected');
+        };
+    };
+
+    connectWebSocket();
 </script>
