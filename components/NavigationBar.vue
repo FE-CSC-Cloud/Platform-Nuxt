@@ -2,11 +2,9 @@
     <div class="bg-secondary-700">
         <div class="wrapper flex lg:flex-row flex-col lg:items-center justify-between">
             <div class="flex lg:flex-row flex-col lg:items-center gap-x-10">
-                <NuxtLink href="/" class="py-2">
-                    <div class="flex items-center gap-x-1 text-xl font-medium text-secondary-50">
-                        <img src="/logo.png" width="25px" height="25px" alt="Logo" />
-                        {{ appName }}
-                    </div>
+                <NuxtLink href="/" class="py-2 flex items-center gap-x-1 text-xl font-medium text-secondary-50">
+                    <img src="/logo.png" width="25px" height="25px" alt="Logo" />
+                    {{ appName }}
                 </NuxtLink>
                 <NuxtLink to="/" class="navlink">
                     <Icon name="heroicons:squares-plus-16-solid" />

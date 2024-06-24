@@ -47,7 +47,7 @@
 
     const tooltipClass = computed(() => ({
         'opacity-100': isOpen.value,
-        'opacity-0': !isOpen.value,
+        'opacity-0 pointer-events-none': !isOpen.value,
         'tooltip-bottom': props.position.includes('bottom')
     }));
 

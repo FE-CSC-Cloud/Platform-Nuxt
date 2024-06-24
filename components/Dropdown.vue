@@ -52,7 +52,7 @@
 
     const dropdownClass = computed(() => ({
         'opacity-100': isOpen.value,
-        'opacity-0': !isOpen.value
+        'opacity-0 pointer-events-none': !isOpen.value
     }));
 
     onMounted(() => {

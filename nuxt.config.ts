@@ -3,6 +3,7 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             baseUrlApi: process.env.NUXT_PUBLIC_BASE_URL_API,
+            terminalApi: process.env.NUXT_PUBLIC_TERMINAL_API,
             refreshInterval: process.env.NUXT_PUBLIC_REFRESH_INTERVAL,
             appName: process.env.NUXT_PUBLIC_APP_NAME
         }

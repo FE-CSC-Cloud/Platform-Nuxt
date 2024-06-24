@@ -159,6 +159,7 @@ body:has(.requires-no-scroll) {
     @apply relative flex items-center;
 }
 .input-wrapper > input,
+.input-wrapper > textarea,
 .input-wrapper > select{
     @apply px-3 py-2 rounded-md w-full
         bg-secondary-600 text-secondary-100 border-secondary-500
@@ -168,6 +169,7 @@ body:has(.requires-no-scroll) {
     @apply absolute left-4 text-secondary-400 pointer-events-none;
 }
 .input-wrapper > svg ~ input,
+.input-wrapper > svg ~ textarea,
 .input-wrapper > svg ~ select{
     @apply pl-10;
 }
@@ -176,13 +178,18 @@ body:has(.requires-no-scroll) {
 .input-wrapper > input:focus,
 .input-wrapper > select:hover,
 .input-wrapper > select:active,
-.input-wrapper > select:focus{
+.input-wrapper > select:focus,
+.input-wrapper > textarea:hover,
+.input-wrapper > textarea:active,
+.input-wrapper > textarea:focus{
     @apply border-secondary-400;
 }
 .input-wrapper > input:active,
 .input-wrapper > input:focus,
 .input-wrapper > select:active,
-.input-wrapper > select:focus{
+.input-wrapper > select:focus,
+.input-wrapper > textarea:active,
+.input-wrapper > textarea:focus{
     @apply bg-secondary-500;
 }
 .input-wrapper > input::placeholder{

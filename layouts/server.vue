@@ -1,13 +1,16 @@
 <template>  
     <NavigationBar />
     <div class="bg-secondary-700 border-t-2 border-secondary-500">
-        <div class="wrapper py-5">
+        <div class="wrapper pt-5">
             <div class="flex items-start justify-between">
                 <div>
-                    <div class="mb-1">
+                    <div class="mb-1 flex items-center gap-x-2">
                         <h1 class="text-xl font-medium text-secondary-100">
-                            {{ server.name }}</h1>
-                        <span>{{ server.powerStatus }}</span>
+                            {{ server.name }}
+                        </h1>
+                        <span :class="server.powerStatus === 'POWERED_ON' ? 'bg-success-300/20' : 'bg-danger-300/20'">
+                            {{ server.powerStatus === 'POWERED_ON' ? 'Online' : 'Offline' }}
+                        </span>
                     </div>
                     <p>{{ server.description }}</p>
                     <div class="flex items-center gap-x-8 mt-4">
@@ -24,6 +27,13 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-x-2">
+                    <button 
+                        class="button button-secondary"
+                        @click="OpenWindow"
+                        :disabled="server.powerStatus !== 'POWERED_ON'"
+                    >
+                        <Icon name="heroicons:command-line-16-solid" />
+                    </button>
                     <button
                         class="button button-success"
                         :disabled="server.powerStatus === 'POWERED_ON'"
@@ -33,7 +43,7 @@
                     </button>
                     <button 
                         class="button button-danger"
-                        :disabled="server.powerStatus === 'SUSPENDED'"
+                        :disabled="server.powerStatus === 'SUSPENDED' || server.powerStatus === 'POWERED_OFF'"
                         @click="powerAction('off')"
                     >
                         Stop
@@ -48,7 +58,7 @@
                     >
                         <template #button>
                             <button
-                                :disabled="server.powerStatus === 'SUSPENDED'"
+                                :disabled="server.powerStatus === 'SUSPENDED' || server.powerStatus === 'POWERED_OFF'"
                                 class="button button-danger"
                             >
                                 Kill
@@ -59,6 +69,14 @@
                         </template>
                     </Modal>
                 </div>
+            </div>
+            <div>
+                <NuxtLink :to="`/server/${server.ID}`">
+                    Overview
+                </NuxtLink>
+                <NuxtLink :to="`/server/${server.ID}/settings`">
+                    Settings
+                </NuxtLink>
             </div>
         </div>
     </div>
@@ -73,13 +91,13 @@
     import dayjs from 'dayjs';
     import { useServerStore } from '~/store/server';
 
+    const addToast = useToast();
     const session = useCookie("session");
     const server = useServerStore();
-    const addToast = useToast();
 
     const powerAction = async (action) => {
         try {
-            addToast({ title: `Server marked as ${action}` });
+            addToast({ title: `${server.name} marked as ${action}` });
 
             await $fetch(`/servers/power/${server.ID}/${action}`, {
                 method: 'POST',
@@ -88,6 +106,9 @@
                     'Authorization': `Bearer ${session.value}`
                 }
             });
+
+            server.fetchServer(server.ID);
+
         } catch (error) {
             handleError(error);
             console.error(error);
@@ -103,5 +124,22 @@
             clearInterval(intervalId);
         })
     });
+
+    async function OpenWindow(){
+        const url = `/server/${server.ID}/terminal`;
+        const windowName = 'floatingWindow';
+        const features = `
+            width=800,
+            height=600,
+            top=${window.screenY + 50},
+            left=${window.screenX + 50}
+        `;
+        
+        const floatingWindow = window.open(url, windowName, features);
+
+        if (!floatingWindow) {
+            addToast({ title: 'Popup blocked! Please allow popups for this website.' });
+        }
+    }
 </script>
   

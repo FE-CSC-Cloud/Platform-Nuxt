@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper flex items-center justify-between text-sm text-gray-500 font-light mt-4">
+    <div class="wrapper flex items-center justify-between text-sm text-gray-500 font-light mt-2 py-2">
         <LanguageSwitcher />
         <div>
             Gemaakt door

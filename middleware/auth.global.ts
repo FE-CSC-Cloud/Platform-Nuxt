@@ -1,4 +1,7 @@
+import { useServersStore } from '~/store/servers';
+
 export default defineNuxtRouteMiddleware(async (to, from) => {
+    const servers = useServersStore();
     const session = useCookie("session");
 
     if(
@@ -7,5 +10,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         (!to.path.startsWith('/auth') || !to.name)
     ){
         return navigateTo('/auth/login');
+    } else {
+        if(!to.path.startsWith('/auth') && (servers.servers.length < 1 || to.path === '/')){
+            await servers.fetchServers();
+        }
     }
 })

@@ -5,7 +5,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     const fromId = ref(from.path.split('/')[2] || '');
     const id = ref(to.path.split('/')[2] || '');
 
-    if(to.path.includes('/server/') && (fromId !== id)){
+    if(to.path.includes('/server/')){
         await server.fetchServer(id.value);
     }
 })
