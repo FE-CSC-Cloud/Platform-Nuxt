@@ -19,7 +19,7 @@
     }, 5000);
 </script>
 
-<style>
+<style scoped>
     .toast{
         @apply relative bg-secondary-600 mt-2 w-[350px] px-4 py-3 rounded-lg overflow-hidden;
     }

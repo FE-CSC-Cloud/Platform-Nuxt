@@ -41,7 +41,7 @@
     const appName = useRuntimeConfig().public.appName;
 </script>
   
-<style>
+<style scoped>
     .navlink {
         @apply flex items-center gap-x-1 border-b-2 border-transparent py-4 duration-300;
     }

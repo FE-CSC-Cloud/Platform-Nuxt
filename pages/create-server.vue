@@ -19,8 +19,8 @@
                 <label for="memory" class="label">Memory</label>
                 <div class="slider">
                     <input name="memory" type="range" v-model="memory" min="1" max="2" />
-                    <span class="indicator" :style="`left: ${memory === null ? 1 : memory * 100 - 100}%;`" />
-                    <span :style="`width: ${memory === null ? 1 : memory * 100 - 100}%;`" />
+                    <span class="indicator" :style="`left: ${memory * 100 - 100}%;`" />
+                    <span :style="`width: ${memory * 100 - 100}%;`" />
                 </div>
                 <div class="flex items-start justify-between mb-5">
                     <span class="text-sm text-secondary-300">1GB</span>
@@ -30,8 +30,8 @@
                 <label for="memory" class="label">Disk</label>
                 <div class="slider">
                     <input name="memory" type="range" v-model="disk" min="1" max="20" />
-                    <span class="indicator" :style="`left: ${disk === null ? 1 : disk * 5.2 - 5}%;`" />
-                    <span :style="`width: ${disk === null ? 1 : disk * 5.2 - 5}%;`" />
+                    <span class="indicator" :style="`left: ${disk * 5.2 - 5}%;`" />
+                    <span :style="`width: ${disk * 5.2 - 5}%;`" />
                 </div>
                 <div class="flex items-start justify-between">
                     <span class="text-sm text-secondary-300">1GB</span>
@@ -82,7 +82,6 @@
                 disable-pipeline
             >
                     <InputWrapper
-                        class="flex-1"
                         id="name"
                         label="Server name*"
                     >
@@ -94,7 +93,7 @@
                         />
                     </InputWrapper>
                     <InputWrapper
-                        class="flex-1"
+                        class="mt-3"
                         id="description"
                         label="Server description"
                     >
@@ -187,8 +186,8 @@
     const isLoading = ref(false);
     const isError = ref(undefined);
 
-    const memory = ref(null);
-    const disk = ref(null);
+    const memory = ref(1);
+    const disk = ref(5);
     const operationSystem = ref(undefined);
     const subdomain = ref(undefined);
     const name = ref(undefined);

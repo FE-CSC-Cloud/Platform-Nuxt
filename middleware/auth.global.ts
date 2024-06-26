@@ -11,7 +11,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     ){
         return navigateTo('/auth/login');
     } else {
-        if(!to.path.startsWith('/auth') && (servers.servers.length < 1 || to.path === '/')){
+        if(!to.path.startsWith('/auth') && servers.servers && (servers.servers.length < 1 || to.path === '/')){
             await servers.fetchServers();
         }
     }

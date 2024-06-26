@@ -1,5 +1,3 @@
-import { handleError } from "vue";
-
 export const useServersStore = defineStore('serversStore', () => {
     const servers = ref([]);
 
@@ -17,7 +15,7 @@ export const useServersStore = defineStore('serversStore', () => {
 
             servers.value = serverRes;
         } catch (error) {
-            // handleError(error);
+            handleError(error);
             console.error(error);
         }
     };

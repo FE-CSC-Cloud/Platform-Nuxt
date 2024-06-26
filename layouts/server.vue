@@ -14,16 +14,22 @@
                     </div>
                     <p>{{ server.description }}</p>
                     <div class="flex items-center gap-x-8 mt-4">
-                        <div class="flex items-center gap-x-1">
-                            <Icon name="heroicons:globe-alt-solid" />
-                            {{ server.IP }}
-                        </div>
+                        <CopyText :text="server.IP">
+                            <div class="flex items-center gap-x-1">
+                                <Icon name="heroicons:globe-alt-solid" />
+                                {{ server.IP }}
+                            </div>
+                        </CopyText>
                         <Tooltip position="bottom" :tooltip="`De server verloopt op ${server.endDate}, vergeet hem niet te verlengen!`">
                             <div class="flex items-center gap-x-1">
                                 <Icon name="tabler:alarm-filled" />
                                 {{ dayjs(server.endDate).format('D MMMM YYYY') }}
                             </div>
                         </Tooltip>
+                        <div class="flex items-center gap-x-1">
+                            <Icon name="tabler:photo-filled" />
+                            {{ server.operatingSystem }}
+                        </div>
                     </div>
                 </div>
                 <div class="flex items-center gap-x-2">
@@ -70,11 +76,17 @@
                     </Modal>
                 </div>
             </div>
-            <div>
-                <NuxtLink :to="`/server/${server.ID}`">
+            <div class="flex items-center gap-x-8 mt-4">
+                <NuxtLink :to="`/server/${server.ID}`" class="navlink">
                     Overview
                 </NuxtLink>
-                <NuxtLink :to="`/server/${server.ID}/settings`">
+                <NuxtLink :to="`/server/${server.ID}/dns`" class="navlink">
+                    DNS
+                </NuxtLink>
+                <NuxtLink :to="`/server/${server.ID}/firewall`" class="navlink">
+                    Firewall
+                </NuxtLink>
+                <NuxtLink :to="`/server/${server.ID}/settings`" class="navlink">
                     Settings
                 </NuxtLink>
             </div>
@@ -142,4 +154,17 @@
         }
     }
 </script>
-  
+
+<style scoped>
+    .navlink {
+        @apply flex items-center gap-x-1 border-b-2 border-transparent py-2 duration-300;
+    }
+    .navlink:hover {
+        @apply text-secondary-100;
+    }
+    .navlink.router-link-active,
+    .navlink:focus,
+    .navlink:active {
+        @apply border-primary-300 text-secondary-100;
+    }
+</style>

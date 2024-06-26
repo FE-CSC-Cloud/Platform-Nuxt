@@ -74,7 +74,7 @@ onMounted(async () => {
 });
 </script>
 
-<style>
+<style scoped>
 .has-notification {
     @apply relative;
 }
