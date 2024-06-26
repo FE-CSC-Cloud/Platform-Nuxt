@@ -3,7 +3,7 @@
         <slot name="button" />
     </div>
 
-    <div v-if="isOpen" class="fixed top-0 p-5 flex items-center justify-center z-40 inset-0 max-h-screen requires-no-scroll">
+    <div v-if="isOpen" class="fixed top-0 p-5 flex items-center justify-center z-30 inset-0 max-h-screen requires-no-scroll">
 
         <div class="fixed top-0 inset-0 bg-black/40 z-[-1]" @click="closeModal" />
         
@@ -17,7 +17,7 @@
             <div class="max-h-[500px] overflow-auto px-6 pt-2 pb-5">
                 <slot name="modal" />
             </div>
-            <div class="bg-secondary-600 px-6 py-5 flex gap-x-3 items-center justify-end">
+            <div v-if="cancel || action" class="bg-secondary-600 px-6 py-5 flex gap-x-3 items-center justify-end">
                 <button 
                     class="button button-danger outlined"
                     @click="closeModal"

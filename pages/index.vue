@@ -10,7 +10,10 @@
             <div class="flex items-center gap-x-2">
                 <h2 class="text-lg font-medium text-secondary-100">{{ server.Name }}</h2>
 
-                <span :class="server.PowerStatus === 'POWERED_ON' ? 'bg-success-300/20' : 'bg-danger-300/20'">
+                <span 
+                    class="badge badge-variant-secondary" 
+                    :class="server.PowerStatus === 'POWERED_ON' ? 'badge-success' : 'badge-danger'"
+                >
                     {{ server.PowerStatus === 'POWERED_ON' ? 'Online' : 'Offline' }}
                 </span>
             </div>

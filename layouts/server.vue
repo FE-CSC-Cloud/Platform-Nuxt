@@ -8,7 +8,10 @@
                         <h1 class="text-xl font-medium text-secondary-100">
                             {{ server.name }}
                         </h1>
-                        <span :class="server.powerStatus === 'POWERED_ON' ? 'bg-success-300/20' : 'bg-danger-300/20'">
+                        <span 
+                            class="badge badge-variant-secondary" 
+                            :class="server.PowerStatus === 'POWERED_ON' ? 'badge-success' : 'badge-danger'"
+                        >
                             {{ server.powerStatus === 'POWERED_ON' ? 'Online' : 'Offline' }}
                         </span>
                     </div>
