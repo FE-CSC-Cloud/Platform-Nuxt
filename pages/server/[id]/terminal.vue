@@ -144,12 +144,22 @@
                     </button>
                 </div>
             </div>
-            <div v-if="textField">
-
+            <div v-if="curFile" class="pt-3 w-full bg-secondary-700 border-t border-secondary-500">
+                <div class="px-4 flex items-center justify-between mb-2">
+                    <span class="text-sm font-medium text-secondary-300">{{ curFile }}</span>
+                    <div class="flex items-center gap-x-2">
+                        <button @click="closeFile" class="button button-secondary outlined">
+                            Cancel
+                        </button>
+                        <button @click="saveFile" class="button button-secondary">
+                            Save
+                        </button>
+                    </div>
+                </div>
                 <textarea
                     v-model="textField"
-                    class="px-4 py-3 w-full bg-secondary-700 border-t border-secondary-500 outline-none"
-                    rows="10" 
+                    class="outline-none w-full bg-transparent px-4 pb-3"
+                    rows="5" 
                 />
             </div>
         </div>
@@ -161,6 +171,8 @@
 
 <script setup>
     import { useServerStore } from '~/store/server';
+
+    const addToast = useToast();
 
     const loggedIn = ref(false);
     const isLoading = ref(false);
@@ -180,7 +192,7 @@
     const files = ref([]);
     const terminalElement = ref(null);
     const textField = ref(null);
-    const openFile = ref(null);
+    const curFile = ref(null);
     const ws = ref(null);
 
     const formattedOutput = computed(() => {
@@ -230,6 +242,18 @@
             reqType: 'logout'
         });
         window.close();
+    };
+
+    const closeFile = () => {
+        textField.value = null;
+        curFile.value = null;
+    }
+
+    const saveFile = () => {
+        const escapedTextField = textField.value.replace(/"/g, '\\"');
+        sendMessage({ command: `echo "${escapedTextField}" > ${curFile.value}` });
+        addToast({ title: `${curFile.value} saved` });
+        closeFile();
     }
 
     const connectWebSocket = () => {
@@ -253,7 +277,7 @@
 
         const updateFilePath = () => {
             if (data.filePath && data.filePath !== path.value) {
-                textField.value = null;
+                closeFile();
             }
             if (data.filePath) {
                 path.value = data.filePath;
@@ -275,6 +299,7 @@
         const updateOutput = () => {
             if (data.type === 'text') {
                 textField.value = data.stdout;
+                curFile.value = data.textFile;
             } else {
                 if (data.stderr) {
                     output.value.push(data.stderr);
@@ -302,6 +327,8 @@
         updateStatus();
         updateOutput();
         updateDirectoriesAndFiles();
+
+        console.log(data);
 
         setTimeout(() => {
             scrollToBottom();

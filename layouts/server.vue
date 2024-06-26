@@ -10,7 +10,7 @@
                         </h1>
                         <span 
                             class="badge badge-variant-secondary" 
-                            :class="server.PowerStatus === 'POWERED_ON' ? 'badge-success' : 'badge-danger'"
+                            :class="server.powerStatus === 'POWERED_ON' ? 'badge-success' : 'badge-danger'"
                         >
                             {{ server.powerStatus === 'POWERED_ON' ? 'Online' : 'Offline' }}
                         </span>

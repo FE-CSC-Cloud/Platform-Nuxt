@@ -562,7 +562,7 @@ body:has(.requires-no-scroll) {
     @apply bg-success-300 text-success-50;
 }
 .badge.badge-success.badge-variant-secondary{
-    @apply bg-primary-300/20 text-success-300;
+    @apply bg-success-300/20 text-success-300;
 }
 .badge.badge-success.badge-variant-terrarity{
     @apply border-success-300 text-success-300;
@@ -592,7 +592,7 @@ body:has(.requires-no-scroll) {
     @apply w-full bg-secondary-700 rounded-lg;
 }
 .table .table-header{
-    @apply px-5 pt-4;
+    @apply px-5 pt-4 flex items-center justify-between;
 }
 .table table {
     @apply w-full;
@@ -603,7 +603,8 @@ body:has(.requires-no-scroll) {
 .table table tr > *:last-of-type{
     @apply pr-5;
 }
-.table table tr:not(:last-of-type){
+.table table tbody tr:not(:last-of-type),
+.table table thead tr{
     @apply border-b border-secondary-500;
 }
 .table table tr th{
