@@ -8,7 +8,7 @@
     import { useToastStore } from '~/store/toasts';
 
     const props = defineProps({
-        id: String,
+        id: Number,
         title: String
     });
 

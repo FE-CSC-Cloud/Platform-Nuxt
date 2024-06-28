@@ -157,6 +157,7 @@
                     </div>
                 </div>
                 <textarea
+                    autofocus
                     v-model="textField"
                     class="outline-none w-full bg-transparent px-4 pb-3"
                     rows="5" 

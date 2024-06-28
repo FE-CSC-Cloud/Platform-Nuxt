@@ -16,7 +16,7 @@
                 <template #modal>
                     <div class="flex flex-col gap-2 mt-1">
                         <p class="text-sm">
-                            Want more server resources, an additional server slot, a port open in the firewall or any other request for the CSC Guild? Then make a request here!
+                            Want more server resources, an additional server slot, a port open in the firewall or any other request for the CSC Gilde? Then make a request here!
                         </p>
                         <InputWrapper label="Request title" id="title">
                             <input v-model="title" id="title" placeholder="Request title">

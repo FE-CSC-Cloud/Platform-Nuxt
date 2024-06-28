@@ -1,11 +1,10 @@
 <template>
     <h1 class="header">Create server</h1>
-    
     <div class="alert alert-danger mb-4" v-if="isError">
         <div class="alert-body">
             <Icon name="tabler:alert-triangle-filled" />
             <b>Warning</b>
-            {{ isError.response._data }}
+            {{ isError }}
         </div>
     </div>
 
@@ -29,12 +28,12 @@
 
                 <label for="memory" class="label">Disk</label>
                 <div class="slider">
-                    <input name="memory" type="range" v-model="disk" min="1" max="20" />
-                    <span class="indicator" :style="`left: ${disk * 5.2 - 5}%;`" />
-                    <span :style="`width: ${disk * 5.2 - 5}%;`" />
+                    <input name="memory" type="range" v-model="disk" min="0" max="10" />
+                    <span class="indicator" :style="`left: ${disk * 10}%;`" />
+                    <span :style="`width: ${disk * 10}%;`" />
                 </div>
                 <div class="flex items-start justify-between">
-                    <span class="text-sm text-secondary-300">1GB</span>
+                    <span class="text-sm text-secondary-300">10GB</span>
                     <span class="text-sm text-secondary-300">20GB</span>
                 </div>
             </CreateServerItem>
@@ -115,7 +114,7 @@
                     <div>
                         <span class="text-sm text-secondary-300">Server plan</span>
                         <p>Memory: {{ memory }}GB</p>
-                        <p>Disk: {{ disk }}GB</p>
+                        <p>storage: {{ Number(disk) + 10 }}GB</p>
                     </div>
                 </div>
                 <div class="flex gap-x-3">
@@ -172,6 +171,7 @@
 
 <script setup>
     import dayjs from 'dayjs';
+    import { useServersStore } from '~/store/servers';
 
     definePageMeta({
         layout: 'dashboard'
@@ -180,18 +180,23 @@
         title: 'Create server' + ' - ' + useRuntimeConfig().public.appName,
     });
 
+    const servers = useServersStore();
     const addToast = useToast();
     const session = useCookie("session");
     const templates = ref([]);
     const isLoading = ref(false);
     const isError = ref(undefined);
 
-    const memory = ref(1);
-    const disk = ref(5);
+    const memory = ref('1');
+    const disk = ref('5');
     const operationSystem = ref(undefined);
     const subdomain = ref(undefined);
     const name = ref(undefined);
     const description = ref(undefined);
+
+    if(servers.servers.length > 1){
+        isError.value = 'You\'ve reached the server limit of 2 servers';
+    }
 
     try {
         const response = await $fetch('/templates', {
@@ -215,34 +220,33 @@
         const futureDate = now.add(3, 'month');
         const expireDate = futureDate.format('YYYY-MM-DD');
 
-        try{
-            await $fetch('/servers', {
-                method: 'POST',
-                baseURL: useRuntimeConfig().public.baseUrlApi,
-                headers: {
-                    'Authorization': `Bearer ${session.value}`
-                },
-                body: {
-                    name: name.value,
-                    description: description.value,
-                    operating_system: operationSystem.value,
-                    end_date: expireDate,
-                    memory: Number(memory.value),
-                    storage: Number(disk.value)
-                }
-            });
+            try{
+                await $fetch('/servers', {
+                    method: 'POST',
+                    baseURL: useRuntimeConfig().public.baseUrlApi,
+                    headers: {
+                        'Authorization': `Bearer ${session.value}`
+                    },
+                    body: {
+                        name: name.value,
+                        description: description.value,
+                        operating_system: operationSystem.value,
+                        end_date: expireDate,
+                        memory: Number(memory.value),
+                        storage: (Number(disk.value) + 10)
+                    }
+                });
 
-            addToast({ title: `Server succesfully created` });
-            navigateTo('/');
-        } catch (error) {
-            handleError(error);
-            isError.value = error;
-            console.error(error);
-        } finally {
-            isLoading.value = false;
-        }
+                addToast({ title: `Server succesfully created` });
+                navigateTo('/');
+            } catch (error) {
+                handleError(error);
+                isError.value = error.response._data;
+                console.error(error);
+            } finally {
+                isLoading.value = false;
+            }
     }
-
 </script>
 
 <style>

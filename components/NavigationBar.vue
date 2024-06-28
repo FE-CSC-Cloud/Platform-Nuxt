@@ -28,16 +28,25 @@
                         <Icon name="heroicons:user-circle-16-solid" />
                     </NuxtLink>
                 </Tooltip>
-                <NuxtLink to="/create-server" class="button button-primary flex items-center gap-x-1 lg:w-auto w-full justify-center">
+                <NuxtLink v-if="servers.servers.length < 2" to="/create-server" class="button button-primary flex items-center gap-x-1 lg:w-auto w-full justify-center">
                     <Icon name="heroicons:plus-circle-16-solid" />
                     Create server
                 </NuxtLink>
+                <Tooltip v-if="servers.servers.length > 1" position="bottom left" tooltip="You've reached your the server limit">
+                    <NuxtLink class="button button-primary flex items-center gap-x-1 lg:w-auto w-full justify-center" disabled>
+                        <Icon name="heroicons:plus-circle-16-solid" />
+                        Create server
+                    </NuxtLink>
+                </Tooltip>
             </div>
         </div>
     </div>
 </template>
   
 <script setup>
+    import { useServersStore } from '~/store/servers';
+
+    const servers = useServersStore();
     const appName = useRuntimeConfig().public.appName;
 </script>
   

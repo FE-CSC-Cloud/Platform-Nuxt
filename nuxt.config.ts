@@ -11,11 +11,12 @@ export default defineNuxtConfig({
 
     devtools: { enabled: true },
     modules: [
-        '@nuxtjs/tailwindcss', 
-        '@nuxtjs/i18n', 
-        'nuxt-icon', 
+        '@nuxtjs/tailwindcss',
+        '@nuxtjs/i18n',
+        'nuxt-icon',
         '@pinia/nuxt',
-        'dayjs-nuxt'
+        'dayjs-nuxt',
+        "@nuxt/image"
     ],
 
     tailwindcss: {
