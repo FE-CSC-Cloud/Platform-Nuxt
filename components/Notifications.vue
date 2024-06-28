@@ -43,7 +43,7 @@ const fetchNotifications = async () => {
             }
         });
 
-        notifications.value = response;
+        notifications.value = response.reverse();
     } catch (error) {
         handleError(error);
         console.error(error);
@@ -74,7 +74,7 @@ onMounted(async () => {
 });
 </script>
 
-<style>
+<style scoped>
 .has-notification {
     @apply relative;
 }
@@ -100,7 +100,7 @@ onMounted(async () => {
     @apply flex items-end justify-between text-sm text-secondary-300;
 }
 .notifications-modal .notification > div button {
-    @apply w-2 h-2 rounded-full border border-primary-300;
+    @apply w-2.5 h-2.5 rounded-full border border-primary-300;
 }
 .notifications-modal .notification > div button.unread {
     @apply bg-primary-300;

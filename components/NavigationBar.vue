@@ -2,11 +2,9 @@
     <div class="bg-secondary-700">
         <div class="wrapper flex lg:flex-row flex-col lg:items-center justify-between">
             <div class="flex lg:flex-row flex-col lg:items-center gap-x-10">
-                <NuxtLink href="/" class="py-2">
-                    <div class="flex items-center gap-x-1 text-xl font-medium text-secondary-50">
-                        <img src="/logo.png" width="25px" height="25px" alt="Logo" />
-                        {{ appName }}
-                    </div>
+                <NuxtLink href="/" class="py-2 flex items-center gap-x-1 text-xl font-medium text-secondary-50">
+                    <img src="/logo.png" width="25px" height="25px" alt="Logo" />
+                    {{ appName }}
                 </NuxtLink>
                 <NuxtLink to="/" class="navlink">
                     <Icon name="heroicons:squares-plus-16-solid" />
@@ -30,20 +28,29 @@
                         <Icon name="heroicons:user-circle-16-solid" />
                     </NuxtLink>
                 </Tooltip>
-                <NuxtLink to="/create-server" class="button button-primary flex items-center gap-x-1 lg:w-auto w-full justify-center">
+                <NuxtLink v-if="servers.servers.length < 2" to="/create-server" class="button button-primary flex items-center gap-x-1 lg:w-auto w-full justify-center">
                     <Icon name="heroicons:plus-circle-16-solid" />
                     Create server
                 </NuxtLink>
+                <Tooltip v-if="servers.servers.length > 1" position="bottom left" tooltip="You've reached your the server limit">
+                    <NuxtLink class="button button-primary flex items-center gap-x-1 lg:w-auto w-full justify-center" disabled>
+                        <Icon name="heroicons:plus-circle-16-solid" />
+                        Create server
+                    </NuxtLink>
+                </Tooltip>
             </div>
         </div>
     </div>
 </template>
   
 <script setup>
+    import { useServersStore } from '~/store/servers';
+
+    const servers = useServersStore();
     const appName = useRuntimeConfig().public.appName;
 </script>
   
-<style>
+<style scoped>
     .navlink {
         @apply flex items-center gap-x-1 border-b-2 border-transparent py-4 duration-300;
     }

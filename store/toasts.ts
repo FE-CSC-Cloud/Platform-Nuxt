@@ -3,11 +3,8 @@ export const useToastStore = defineStore('toastStore', () => {
 
     const addToast = (toast) => {
         const id = Date.now();
+        
         toasts.value.push({ id, ...toast });
-
-        setTimeout(() => {
-            removeToast(id);
-        }, 3000);
     };
 
     const removeToast = (id) => {

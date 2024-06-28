@@ -1,0 +1,7 @@
+services:
+  my-app:
+    container_name: Nuxt-3
+    build:
+        dockerfile: ./Dockerfile
+    ports:
+      - "80:3000"

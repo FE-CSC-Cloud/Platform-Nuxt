@@ -2,7 +2,7 @@
     <InputWrapper>
         <select v-model="selectedServer" @change="selectServer" class="min-w-56">
             <option value="" class="hidden">Select a server</option>
-            <option v-for="server in servers" :key="server.ID" :value="server.ID">
+            <option v-for="server in servers.servers" :key="server.ID" :value="server.ID">
                 {{ server.Name }}
             </option>
         </select>
@@ -10,6 +10,8 @@
 </template>
 
 <script setup>
+    import { useServersStore } from '~/store/servers';
+
     const route = useRoute();
 
     const selectedServer = ref(route.path.split('/')[2] || '');
@@ -25,22 +27,5 @@
         navigateTo(`/server/${event.target.value}`);
     };
 
-    const servers = ref([]);
-
-    try {
-        const session = useCookie("session");
-
-        const serverRes = await $fetch('/servers', {
-            method: 'GET',
-            baseURL: useRuntimeConfig().public.baseUrlApi,
-            headers: {
-                'Authorization': `Bearer ${session.value}`
-            }
-        });
-        
-        servers.value = serverRes;
-    } catch (error) {
-        handleError(error);
-        console.error(error);
-    }
+    const servers = useServersStore();
 </script>

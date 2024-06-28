@@ -159,6 +159,7 @@ body:has(.requires-no-scroll) {
     @apply relative flex items-center;
 }
 .input-wrapper > input,
+.input-wrapper > textarea,
 .input-wrapper > select{
     @apply px-3 py-2 rounded-md w-full
         bg-secondary-600 text-secondary-100 border-secondary-500
@@ -168,6 +169,7 @@ body:has(.requires-no-scroll) {
     @apply absolute left-4 text-secondary-400 pointer-events-none;
 }
 .input-wrapper > svg ~ input,
+.input-wrapper > svg ~ textarea,
 .input-wrapper > svg ~ select{
     @apply pl-10;
 }
@@ -176,13 +178,18 @@ body:has(.requires-no-scroll) {
 .input-wrapper > input:focus,
 .input-wrapper > select:hover,
 .input-wrapper > select:active,
-.input-wrapper > select:focus{
+.input-wrapper > select:focus,
+.input-wrapper > textarea:hover,
+.input-wrapper > textarea:active,
+.input-wrapper > textarea:focus{
     @apply border-secondary-400;
 }
 .input-wrapper > input:active,
 .input-wrapper > input:focus,
 .input-wrapper > select:active,
-.input-wrapper > select:focus{
+.input-wrapper > select:focus,
+.input-wrapper > textarea:active,
+.input-wrapper > textarea:focus{
     @apply bg-secondary-500;
 }
 .input-wrapper > input::placeholder{
@@ -318,7 +325,7 @@ body:has(.requires-no-scroll) {
 }
 
 .tooltip{
-    @apply absolute z-10 max-w-md px-2 py-1 pointer-events-none rounded-md bg-secondary-500 transition-opacity duration-300;
+    @apply absolute z-40 max-w-md px-2 py-1 pointer-events-none rounded-md bg-secondary-500 transition-opacity duration-300;
 }
 .tooltip::after{
     @apply content-[''] absolute -bottom-2 left-2 border-0 border-l-8 border-t-8 border-y-secondary-500 border-r-8 border-x-transparent;
@@ -522,4 +529,99 @@ body:has(.requires-no-scroll) {
 .dropdown > a,
 .dropdown > button{
     @apply text-left min-w-28 cursor-pointer;
+}
+
+.badge{
+    @apply text-sm font-medium px-2 py-1 inline-block rounded border border-transparent;
+}
+.badge.badge-variant-terrarity{
+    @apply !bg-transparent;
+}
+
+.badge.badge-primary{
+    @apply bg-primary-300 text-primary-50;
+}
+.badge.badge-primary.badge-variant-secondary{
+    @apply bg-primary-300/20 text-primary-300;
+}
+.badge.badge-primary.badge-variant-terrarity{
+    @apply border-primary-300 text-primary-300;
+}
+
+.badge.badge-secondary{
+    @apply bg-secondary-500 text-secondary-200;
+}
+.badge.badge-secondary.badge-variant-secondary{
+    @apply bg-secondary-500/20 text-secondary-200;
+}
+.badge.badge-secondary.badge-variant-terrarity{
+    @apply border-secondary-500 text-secondary-200;
+}
+
+.badge.badge-success{
+    @apply bg-success-300 text-success-50;
+}
+.badge.badge-success.badge-variant-secondary{
+    @apply bg-success-300/20 text-success-300;
+}
+.badge.badge-success.badge-variant-terrarity{
+    @apply border-success-300 text-success-300;
+}
+
+.badge.badge-danger{
+    @apply bg-danger-300 text-danger-50;
+}
+.badge.badge-danger.badge-variant-secondary{
+    @apply bg-danger-300/20 text-danger-300;
+}
+.badge.badge-danger.badge-variant-terrarity{
+    @apply border-danger-300 text-danger-300;
+}
+
+.badge.badge-warning{
+    @apply bg-warning-300 text-warning-50;
+}
+.badge.badge-warning.badge-variant-secondary{
+    @apply bg-warning-300/20 text-warning-300;
+}
+.badge.badge-warning.badge-variant-terrarity{
+    @apply border-warning-300 text-warning-300;
+}
+
+.table{
+    @apply w-full bg-secondary-700 rounded-lg;
+}
+.table .table-header{
+    @apply px-5 pt-4 flex items-center justify-between;
+}
+.table table {
+    @apply w-full;
+}
+.table table tr > *:first-of-type{
+    @apply pl-5;
+}
+.table table tr > *:last-of-type{
+    @apply pr-5;
+}
+.table table tbody tr:not(:last-of-type),
+.table table thead tr{
+    @apply border-b border-secondary-500;
+}
+.table table tr th{
+    @apply py-2 text-left text-sm font-medium text-secondary-300;
+}
+.table table tr td{
+    @apply py-2
+}
+
+.fadeIn{
+    animation: fadeIn 1s;
+}
+@keyframes fadeIn {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }

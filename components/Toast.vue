@@ -1,33 +1,38 @@
 <template>
-    <div class="toast-container">
-        <div
-            v-for="toast in toasts"
-            :key="toast.id"
-            class="toast"
-        >
-            <p>{{ toast.title }}</p>
-        </div>
+    <div class="toast">
+        <p>{{ props.title }}</p> 
     </div>
 </template>
   
-<script setup lang="ts">
+<script setup>
     import { useToastStore } from '~/store/toasts';
-    
-    const { toasts } = useToastStore();
+
+    const props = defineProps({
+        id: Number,
+        title: String
+    });
+
+    const toastStore = useToastStore();
+
+    setTimeout(() => {
+        toastStore.removeToast(props.id);
+    }, 5000);
 </script>
-  
+
 <style scoped>
-    .toast-container {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 9999;
+    .toast{
+        @apply relative bg-secondary-600 mt-2 w-[350px] px-4 py-3 rounded-lg overflow-hidden;
     }
-    .toast {
-        background-color: #333;
-        color: white;
-        padding: 10px 20px;
-        margin-bottom: 10px;
-        border-radius: 4px;
+    .toast::after{
+        @apply absolute content-[''] w-full h-1 bg-primary-300 bottom-0 left-0; 
+        animation: toast 5s linear;
+    }
+    @keyframes toast {
+        0%{
+            left: 0;
+        }
+        100%{
+            left: -100%;
+        }
     }
 </style>
