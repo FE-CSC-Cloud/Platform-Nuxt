@@ -194,7 +194,7 @@
     const name = ref(undefined);
     const description = ref(undefined);
 
-    if(servers.servers.length > 1){
+    if(servers.servers && servers.servers.length > 1){
         isError.value = 'You\'ve reached the server limit of 2 servers';
     }
 
