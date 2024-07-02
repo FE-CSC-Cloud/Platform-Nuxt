@@ -16,6 +16,12 @@
                     </Tooltip>
                 </div>
             </div>
+            <div 
+                v-if="isNotificationsEmpty" 
+                class="text-center text-sm text-secondary-300 mb-2"
+            >
+                You've no recent notifications
+            </div>
             <div class="actions">
                 <a href="/notifications">Show all</a>
             </div>
@@ -33,6 +39,9 @@ function updateHasUnRead(){
     hasUnreadNotifications.value = notifications.value.some(notification => notification.read === false);
 }
 
+const isNotificationsEmpty = computed(() => !notifications.value || notifications.value.length < 1);
+
+
 const fetchNotifications = async () => {
     try {
         const response = await $fetch('/notifications', {
@@ -48,6 +57,7 @@ const fetchNotifications = async () => {
         handleError(error);
         console.error(error);
     }
+
 };
 
 const markAs = async (id) => {

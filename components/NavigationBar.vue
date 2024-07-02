@@ -17,17 +17,17 @@
                 <ServerSelector />
             </div>
             <div class="flex lg:flex-none flex-wrap items-center gap-x-4">
-                <Tooltip position="bottom" tooltip="Knowledgebase">
-                <NuxtLink to="/knowledgebase" class="navicon">
-                    <Icon name="heroicons:book-open-16-solid" />
-                </NuxtLink>
-                </Tooltip>
+                <!-- <Tooltip position="bottom" tooltip="Knowledgebase">
+                    <NuxtLink to="/knowledgebase" class="navicon">
+                        <Icon name="heroicons:book-open-16-solid" />
+                    </NuxtLink>
+                </Tooltip> -->
                 <Notifications />
-                <Tooltip position="bottom" tooltip="Account">
+                <!-- <Tooltip position="bottom" tooltip="Account">
                     <NuxtLink to="/account" class="navicon">
                         <Icon name="heroicons:user-circle-16-solid" />
                     </NuxtLink>
-                </Tooltip>
+                </Tooltip> -->
                 <NuxtLink v-if="!servers.servers || servers.servers.length < 2" to="/create-server" class="button button-primary flex items-center gap-x-1 lg:w-auto w-full justify-center">
                     <Icon name="heroicons:plus-circle-16-solid" />
                     Create server

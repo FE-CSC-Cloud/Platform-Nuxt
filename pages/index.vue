@@ -32,6 +32,10 @@
             <p>{{ server.OperatingSystem }}</p>
         </div>  
     </NuxtLink>
+
+    <p v-if="!servers.servers" class="text-center text-sm text-secondary-300 my-2">
+        There are no servers
+    </p>
 </template>
 
 <script setup>

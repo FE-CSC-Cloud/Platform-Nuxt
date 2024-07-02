@@ -21,6 +21,17 @@
                         <InputWrapper label="Request title" id="title">
                             <input v-model="title" id="title" placeholder="Request title">
                         </InputWrapper>
+                        <InputWrapper label="Assign to server" id="serverId">
+                            <select v-model="serverId" id="serverId">
+                                <option value="">No server</option>
+                                <option
+                                    v-for="server in servers.servers"
+                                    :value="server.ID"
+                                >
+                                    {{ server.Name }}
+                                </option>
+                            </select>
+                        </InputWrapper>
                         <InputWrapper label="Request message" id="message">
                             <textarea placeholder="Request message" v-model="message" id="message" rows="4"></textarea>
                         </InputWrapper>
@@ -94,10 +105,14 @@
                 </tr>
             </tbody>
         </table>
+        <p v-if="!tickets" class="text-center text-sm text-secondary-300 my-2">
+            There are no requests
+        </p>
     </div>
 </template>
 
 <script setup>
+import { useServersStore } from '~/store/servers';
 definePageMeta({
     layout: 'dashboard'
 })
@@ -110,9 +125,11 @@ const session = useCookie("session");
 const tickets = ref([]);
 
 const title = ref('');
-const message = ref('')
+const message = ref('');
+const serverId = ref('')
 
 const addToast = useToast();
+const servers = useServersStore();
 
 const apiFetch = (url, method, body) => {
     return $fetch(url, {
@@ -127,9 +144,10 @@ const apiFetch = (url, method, body) => {
 
 const createRequest = async () => {
     try {
-        await apiFetch('/tickets', 'POST', { title: title.value, message: message.value });
+        await apiFetch('/tickets', 'POST', { title: title.value, message: message.value, server_id: serverId.value });
         title.value = '';
         message.value = '';
+        serverId.value = '';
         fetchRequests();
         addToast({ title: `Your request ${title.value} has been created!`});
     } catch (error) {
@@ -181,22 +199,6 @@ const statusClass = (status) => {
         'Rejected': 'badge-danger'
     }[status];
 };
-
-const TooltipItem = defineComponent({
-    props: {
-        icon: String,
-        tooltip: String,
-        text: String
-    },
-    template: `
-        <Tooltip :position="'top'" :tooltip="tooltip">
-            <span class="badge badge-secondary">
-                <Icon :name="icon" />
-                {{ text }}
-            </span>
-        </Tooltip>
-    `
-});
 
 fetchRequests();
 </script>

@@ -27,13 +27,18 @@
 </template>
 
 <script setup>
+    import { useServerStore } from '~/store/server';
+    
     definePageMeta({
         layout: 'server'
     });
     
-    import { useServerStore } from '~/store/server';
-    
     const server = useServerStore();
+
+    useSeoMeta({
+        title: server.name + ' | ' + 'Settings',
+    });
+    
     const session = useCookie("session");
     const addToast = useToast();
 

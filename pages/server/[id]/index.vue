@@ -15,4 +15,8 @@
     });
 
     const server = useServerStore();
+
+    useSeoMeta({
+        title: server.name + ' | ' + 'Overview',
+    });
 </script>

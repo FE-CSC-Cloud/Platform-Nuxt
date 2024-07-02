@@ -1,6 +1,12 @@
 <template>
     <h1 class="header">Notifications</h1>
-    <div v-for="notification in notifications" class="notification">
+    <div 
+        v-if="isNotificationsEmpty" 
+        class="text-center text-sm text-secondary-300 mb-2"
+    >
+        You've no recent notifications
+    </div>
+    <div v-for="notification in notifications" :key="notification.id" class="notification">
         <h2 class="text-lg font-medium">{{ notification.title }}</h2>
         <div class="flex items-center gap-x-2 justify-between">
             {{ notification.message }}
@@ -20,9 +26,14 @@
     definePageMeta({
         layout: 'dashboard'
     })
+    useSeoMeta({
+        title: 'Notifications' + ' - ' + useRuntimeConfig().public.appName,
+    });
 
     const session = useCookie("session");
     const notifications = ref([]);
+
+    const isNotificationsEmpty = computed(() => !notifications.value || notifications.value.length < 1);
 
     const fetchNotifications = async () => {
         try {
@@ -58,20 +69,17 @@
         }
     };
 
-    onMounted(async () => {
-        await fetchNotifications();
-    });
+    await fetchNotifications();
 </script>
 
-
 <style scoped>
-.notification{
+.notification {
     @apply bg-secondary-700 px-5 py-4 border-b border-secondary-500;
 }
-.notification:first-of-type{
-    @apply rounded-t-xl
+.notification:first-of-type {
+    @apply rounded-t-xl;
 }
-.notification:last-of-type{
+.notification:last-of-type {
     @apply border-b-0 rounded-b-xl;
 }
 .notification .actions {

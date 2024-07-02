@@ -5,6 +5,9 @@
             <option v-for="server in servers.servers" :key="server.ID" :value="server.ID">
                 {{ server.Name }}
             </option>
+            <option v-if="!servers.servers" disabled>
+                No servers
+            </option>
         </select>
     </InputWrapper>
 </template>

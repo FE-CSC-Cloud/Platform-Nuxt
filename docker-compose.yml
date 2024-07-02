@@ -4,4 +4,10 @@ services:
     build:
         dockerfile: ./Dockerfile
     ports:
-      - "80:3000"
+      - "84:3000"
+    networks:
+      - backend
+
+networks:
+    backend:
+        driver: bridge

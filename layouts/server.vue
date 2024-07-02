@@ -91,9 +91,6 @@
                     <NuxtLink :to="`/server/${server.ID}`" class="navlink">
                         Overview
                     </NuxtLink>
-                    <NuxtLink :to="`/server/${server.ID}/dns`" class="navlink">
-                        DNS
-                    </NuxtLink>
                     <NuxtLink :to="`/server/${server.ID}/firewall`" class="navlink">
                         Firewall
                     </NuxtLink>
