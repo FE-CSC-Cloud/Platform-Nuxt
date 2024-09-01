@@ -5,5 +5,21 @@
         "password": "Wachtwoord",
         "forgot-password": "Wachtwoord vergeten?",
         "login": "Inloggen"
+    },
+    "create-server": {
+        "create-server": "Server Aanmaken",
+        "plan": "Serverplan",
+        "plan-description": "Selecteer het serverplan dat je nodig hebt, we hanteren eerlijke gebruiksprincipes",
+        "memory": "Geheugen",
+        "storage": "Opslag",
+        "server-os": "Server-besturingssysteem",
+        "server-os-description": "Het server-besturingssysteem is het besturingssysteem dat je op je server wilt installeren.",
+        "domain": "Domein",
+        "domain-description": "Elke server krijgt een eigen subdomein.",
+        "name-description": "Naam & beschrijving",
+        "server-name": "Servernaam",
+        "server-description": "Serverbeschrijving",
+        "server-details": "Serverdetails",
+        "terms-and-conditions": "Onze algemene voorwaarden zijn van toepassing."
     }
 }

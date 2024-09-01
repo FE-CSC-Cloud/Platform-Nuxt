@@ -5,5 +5,21 @@
         "password": "Password",
         "forgot-password": "Forgot password?",
         "login": "Login"
+    },
+    "create-server": {
+        "create-server": "Create Server",
+        "plan": "Server plan",
+        "plan-description": "Select the server plan you need, we apply fair-use principles",
+        "memory": "Memory",
+        "storage": "Storage",
+        "server-os": "Server OS",
+        "server-os-description": "Server OS is the operating system you want installed you your server.",
+        "domain": "Domain",
+        "domain-description": "Every server gets it's own subdomain.",
+        "name-description": "Name & description",
+        "server-name": "Server name",
+        "server-description": "Server description",
+        "server-details": "Server details",
+        "terms-and-conditions": "Our terms and conditions apply."
     }
 }

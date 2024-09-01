@@ -1,5 +1,5 @@
 <template>
-    <h1 class="header">Create server</h1>
+    <h1 class="header">{{ $t(('create-server.create-server')) }}</h1>
     <div class="alert alert-danger mb-4" v-if="isError">
         <div class="alert-body">
             <Icon name="tabler:alert-triangle-filled" />
@@ -11,11 +11,13 @@
     <form @submit.prevent="CreateServer()" class="grid lg:grid-cols-3 gap-5">
         <TitleGreyBox class="lg:col-span-2">
             <CreateServerItem
-                title="Server plan"
-                description="Select the server plan you need, we apply fair-use principles"
+                :title="$t(('create-server.plan'))"
+                :description="$t(('create-server.plan-description'))"
                 :target="(memory && disk)"
             >
-                <label for="memory" class="label">Memory</label>
+                <label for="memory" class="label">
+                    {{ $t(('create-server.memory')) }}
+                </label>
                 <div class="slider">
                     <input name="memory" type="range" v-model="memory" min="1" max="2" />
                     <span class="indicator" :style="`left: ${memory * 100 - 100}%;`" />
@@ -26,9 +28,11 @@
                     <span class="text-sm text-secondary-300">2GB</span>
                 </div>
 
-                <label for="memory" class="label">Disk</label>
+                <label for="disk" class="label">
+                    {{ $t(('create-server.storage')) }}
+                </label>
                 <div class="slider">
-                    <input name="memory" type="range" v-model="disk" min="0" max="10" />
+                    <input name="disk" type="range" v-model="disk" min="0" max="10" />
                     <span class="indicator" :style="`left: ${disk * 10}%;`" />
                     <span :style="`width: ${disk * 10}%;`" />
                 </div>
@@ -38,8 +42,8 @@
                 </div>
             </CreateServerItem>
             <CreateServerItem
-                title="Server OS"
-                description="Server OS is the operating system you want installed you your server."
+                :title="$t(('create-server.server-os'))"
+                :description="$t(('create-server.server-os-description'))"
                 :target="operationSystem"
             >
                 <div class="grid lg:grid-cols-3 gap-2">
@@ -52,8 +56,8 @@
                 </div>
             </CreateServerItem>
             <CreateServerItem
-                title="Domain"
-                description="Every server gets it's own subdomain."
+                :title="$t(('create-server.domain'))"
+                :description="$t(('create-server.domain-description'))"
                 :target="subdomain"
             >
                 <div class="flex items-center gap-x-4">
@@ -76,29 +80,29 @@
                 </div>
             </CreateServerItem>
             <CreateServerItem
-                title="Name & description"
+                :title="$t(('create-server.name-description'))"
                 :target="name"
                 disable-pipeline
             >
                     <InputWrapper
                         id="name"
-                        label="Server name*"
+                        :label="$t(('create-server.server-name')) + '*'"
                     >
                         <input
                             type="text"
                             id="name"
-                            placeholder="Server name*"
+                            :placeholder="$t(('create-server.server-name')) + '*'"
                             v-model="name"
                         />
                     </InputWrapper>
                     <InputWrapper
                         class="mt-3"
                         id="description"
-                        label="Server description"
+                        :label="$t(('create-server.server-description')) + '*'"
                     >
                         <textarea
                             id="description"
-                            placeholder="Server description"
+                            :placeholder="$t(('create-server.server-description')) + '*'"
                             v-model="description"
                         />
                     </InputWrapper>
@@ -106,15 +110,17 @@
         </TitleGreyBox>
         <div>
             <TitleGreyBox class="sticky top-10 flex flex-col gap-4">
-                <h2 class="text-xl font-medium text-secondary-100">Server details</h2>
+                <h2 class="text-xl font-medium text-secondary-100">
+                    {{ $t(('create-server.server-details')) }}
+                </h2>
                 <div class="flex gap-x-3">
                     <span class="prop" :class="(memory && disk) && 'active'">
                         <Icon name="tabler:circle-check-filled" />
                     </span>
                     <div>
-                        <span class="text-sm text-secondary-300">Server plan</span>
-                        <p>Memory: {{ memory }}GB</p>
-                        <p>storage: {{ Number(disk) + 10 }}GB</p>
+                        <span class="text-sm text-secondary-300">{{ $t(('create-server.plan')) }}</span>
+                        <p>{{ $t(('create-server.memory')) }}: {{ memory }}GB</p>
+                        <p>{{ $t(('create-server.storage')) }}: {{ Number(disk) + 10 }}GB</p>
                     </div>
                 </div>
                 <div class="flex gap-x-3">
@@ -122,7 +128,9 @@
                         <Icon name="tabler:circle-check-filled" />
                     </span>
                     <div>
-                        <span class="text-sm text-secondary-300">Server OS</span>
+                        <span class="text-sm text-secondary-300">
+                            {{ $t(('create-server.server-os')) }}
+                        </span>
                         <p>{{ operationSystem || 'Undefined' }}</p>
                     </div>
                 </div>
@@ -145,14 +153,16 @@
                         <Icon name="tabler:circle-check-filled" />
                     </span>
                     <div>
-                        <span class="text-sm text-secondary-300">Server name</span>
+                        <span class="text-sm text-secondary-300">
+                            {{ $t(('create-server.server-name')) }}
+                        </span>
                         <p>{{ name || 'Undefined' }}</p>
                         <p class="text-sm">{{ description }}</p>
                     </div>
                 </div>
                 <div class="mt-2">
                     <NuxtLink href="#" target="_blank" class="block mb-2 text-sm text-secondary-300 hover:underline">
-                        Our terms and conditions apply.
+                        {{ $t(('create-server.terms-and-conditions')) }}
                     </NuxtLink>
                     <button 
                         class="button button-primary w-full text-center" 
@@ -161,7 +171,7 @@
                         <div class="absolute" v-if="isLoading">
                             <Icon name="svg-spinners:180-ring-with-bg" />
                         </div>
-                        Create server
+                        {{ $t(('create-server.create-server')) }}
                     </button>
                 </div>
             </TitleGreyBox>

@@ -1,5 +1,6 @@
 <template>
     <h1 class="header">Overview</h1>
+
     <NuxtLink
         v-for="server in servers.servers"
         :href="`/server/${server.ID}`"
