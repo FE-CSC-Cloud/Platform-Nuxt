@@ -144,7 +144,17 @@ const apiFetch = (url, method, body) => {
 
 const createRequest = async () => {
     try {
-        await apiFetch('/tickets', 'POST', { title: title.value, message: message.value, server_id: serverId.value });
+        const data = { title: title.value, message: message.value };
+
+        if (serverId.value) {
+            data.server_id = serverId.value;
+        }
+
+        await $fetch('/tickets', {
+        method: 'POST',
+        body: data
+        });
+        
         title.value = '';
         message.value = '';
         serverId.value = '';
